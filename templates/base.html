@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <title>TodoList WebApp</title>
+</head>
+
+<body>
+    <nav class="navbar is-info" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="{% url 'todo' %}">
+                <img src="https://th.bing.com/th/id/R.48cae72fb8611b3866a2c42e12542def?rik=DF8kFkIujP1aRA&riu=http%3a%2f%2fcdn.onlinewebfonts.com%2fsvg%2fimg_522858.png&ehk=VV9mRdh57GGD2dltTI8yVpsOt9M73w7ay3pKsQVkZ5U%3d&risl=&pid=ImgRaw&r=0"
+                    width="100%">
+            </a>
+
+            <a role="button" id="burger" class="navbar-burger" aria-label="menu" aria-expanded="false"
+                data-target="navbarBasicExample">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+
+        <div id="navbar-links" class="navbar-menu">
+            <div class="navbar-start">
+                {% if user.is_authenticated %}
+                <a class="navbar-item" href="{% url 'profile' %}">
+                    <b>使用者:{{user.username|upper}}</b>
+                </a>
+                <div class="buttons">
+                    <a class="navbar-item button is-black" href="{% url 'create' %}">
+                        新增todo
+                    </a>
+                    <a class="navbar-item button is-danger" href="{% url 'completed' %}">
+                        已完成todo
+                    </a>
+                </div>
+                {% endif %}
+            </div>
+            <div class="navbar-end">
+                <div class="navbar-item">
+                    <div class="buttons">
+                        {% if not user.is_authenticated %}
+                        <a class="button is-primary" href="{% url 'register' %}">
+                            <strong>註冊</strong>
+                        </a>
+                        <a class="button is-warning" href="{% url 'login' %}">
+                            登入
+                        </a>
+                        {% else %}
+                        <a class="button is-primary" href="{% url 'logout' %}">
+                            <strong>登出</strong>
+                        </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    {% block content %} {% endblock %}
+    </div>
+    <script>
+        // mobile menu
+        const bugerIcon = document.querySelector("#burger");
+        const navbarMenu = document.querySelector("#navbar-links");
+
+        bugerIcon.addEventListener("click", () => {
+            navbarMenu.classList.toggle("is-active");
+        });
+    </script>
+</body>
+
+</html>
