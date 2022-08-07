@@ -1,16 +1,46 @@
 {% extends 'base.html' %} {% block content %}
-<h1>Profile</h1>
+<style>
+    .menu-label {
+        color: rgb(88, 233, 69);
+        font-size: 20px;
+    }
+</style>
 
-<h2>{{user.username}}</h2>
-<ul>
-    <li>信箱:{{user.email}}</li>
-    <li>註冊時間:{{user.date_joined}}</li>
-    <li>最後登入時間:{{user.last_login}}</li>
-    {% if user.is_superuser %}
-    <li>管理者</li>
-    {% endif %}
-</ul>
+<section class="hero is-link is-fullheight-with-navbar">
+    <div class="hero-body">
+        <aside class="menu">
+            <p class="menu-label">
+                <b>使用者</b>
+            </p>
+            <ul class="menu-list">
+                <li>{{user.username}}</li>
+            </ul>
+            <p class="menu-label">
+                <b>信箱</b>
+            </p>
+            <ul class="menu-list">
+                <li>{{user.email}}</li>
+            </ul>
+            <p class="menu-label">
+                <b>註冊時間</b>
+            </p>
+            <ul class="menu-list">
+                <li>{{user.date_joined}}</li>
+            </ul>
+            <p class="menu-label">
+                <b>最後登入時間</b>
+            </p>
+            <ul class="menu-list">
+                <li>{{user.last_login}}</li>
 
+            </ul>
+            {% if user.is_superuser %}
+            <ul class="menu-list">
+                <li>管理者</li>
+            </ul>
+            {% endif %}
+        </aside>
+</section>
 
 
 {% endblock %}

@@ -1,15 +1,47 @@
 {% extends 'base.html' %} {% block content %}
 
-<h1>View</h1>
-
-
 <form action="" method="POST">
-    {% csrf_token %} {{form.as_p}}
-    {% if todo.date_completed %}
-    {{todo.date_completed}}<br>
-    {% endif %}
-    <input type="submit" name="update" value="修改"></button>
-    <input type="submit" name="delete" value="刪除"></button>
+    {% csrf_token %}
+    <section class="hero is-link is-fullheight-with-navbar">
+        <div class="hero-body">
+            <div class="container">
+                <div class="card">
+                    <div class="card-content">
+                        <p class="title">
+                            <label class="Title" for="id_title" style="color: rgb(0, 0, 0);">Title</label>
+                            <input class="input" type="text" name="title" value={{form.title.value}} maxlength="50"
+                                required id="id_title" placeholder="Title input">
+                        </p>
+                        <p class="subtitle">
+                            <label class="Text" for="id_text" style="color: rgb(0, 0, 0);">Text</label>
+                            <textarea class=" textarea is-large" name="text" id="id_text"
+                                placeholder="Textarea">{{form.text.value}}</textarea>
+                        </p>
+                    </div>
+                    <footer class="card-footer">
+                        <p class="card-footer-item">
+                            <label class="checkbox" for="id_important"></label>
+                            {{form.important}}
+                            Important
+
+                        <p class="card-footer-item">
+                            <label class="checkbox" for="id_Completed"></label>
+                            {{form.completed}}
+                            Completed
+                        </p>
+                    </footer>
+                    <footer class="card-footer-item">
+                        <div class="navbar-item">
+                            <input class="button is-warning" type="submit" name="update" value="修改"></button>
+                        </div>
+                        <div class="navbar-item">
+                            <input class="button is-danger" type="submit" name="delete" value="刪除"></button>
+                        </div>
+                    </footer>
+                </div>
+            </div>
+        </div>
+    </section>
 </form>
 
 <p id="message">{{message}}</p>
